@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+
+
+{% block body %}
+
+    <h1>home</h1>
+    
+    
+            {% if questions %}
+            {% for q in  questions %}
+                <h1><a href="{% url 'app:detail'  q.pk %}">{{q.question}}</a></h1>
+            {% endfor %}
+
+    {% else %}
+            <h1>no question yet!</h1>
+        
+    {% endif %}
+        
+        
+{% endblock body %}
+    

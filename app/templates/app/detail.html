@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+
+
+{% block body %}
+<a href="{% url 'app:index' %}">home</a>
+    <h1>detail</h1>
+
+
+    <h1>{{ question.question }}</h1>
+    <p>{{question.date}}</p>
+    
+
+    
+
+    <form action="{% url 'app:vote' question.id %}" method="post">
+        {% csrf_token %}
+        
+            {% if error_message %}
+                <p>{{ error_message }}</p>
+            {% endif %}
+
+            {% for choice in question.choice_set.all %}
+                <input type="radio" name="choice" id="{{ choice }}" value="{{ choice.id }}">
+
+                <label for="{{ choice }}">{{ choice.choice }}-- {{choice.votes}}</label><br>
+            {% endfor %}
+       
+        <input type="submit" value="Vote">
+        </form>
+{% endblock body %}
+    
